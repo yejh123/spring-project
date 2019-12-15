@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:component-scan base-package="com.yejh"/>
+
+    <context:property-placeholder location="classpath:dbconfig.properties"/>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="jdbcUrl" value="${jdbc.jdbcUrl}"/>
+        <property name="driverClass" value="${jdbc.driverClass}"/>
+    </bean>
+
+    <!--配置jdbcTemplate操作数据库-->
+    <bean class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--配置基于xml的事务：依赖aop和tx名称空间
+        1、Spring中提供事务管理器（事务切面）
+        2、配置事务方法
+        3、告诉Spring哪些方法是事务方法
+    -->
+    <aop:config>
+        <aop:pointcut id="txPoint" expression="execution(* com.yejh.service.*.*(..))"/>
+        <!--事务建议；事务增强 advice-ref指向事务管理器的配置-->
+        <aop:advisor advice-ref="myAdvice" pointcut-ref="txPoint"/>
+    </aop:config>
+
+<!--配置事务管理器，transaction-manager指定是配置哪个事务管理器-->
+    <tx:advice id="myAdvice" transaction-manager="transactionManager">
+<!--事务属性-->
+        <tx:attributes>
+<!--指明哪些方法是事务方法-->
+            <tx:method name="*"/>
+            <tx:method name="checkout" propagation="REQUIRES_NEW" timeout="1"/>
+            <tx:method name="get*" read-only="true"/>
+
+        </tx:attributes>
+    </tx:advice>
+
+
+</beans>
+
+
+
+
+
+

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+    <bean id="person01" class="com.yejh.bean.Person">
+        <property name="name" value="捞昌"></property>
+        <property name="age" value="24"></property>
+    </bean>
+
+    <bean id="person02" class="com.yejh.bean.Person">
+
+    </bean>
+
+    <!--    调用有参构造器进行创建对象并赋值-->
+    <bean id="person03" class="com.yejh.bean.Person">
+        <constructor-arg name="name" value="sbchang"/>
+        <constructor-arg name="age" value="24"/>
+    </bean>
+
+    <!--    也可以不指定name属性，不过要严格按照构造器参数的顺序-->
+    <bean id="person04" class="com.yejh.bean.Person">
+        <constructor-arg value="sbchang4"/>
+        <constructor-arg value="24"/>
+    </bean>
+
+    <bean id="person05" class="com.yejh.bean.Person"
+          p:name="sbchang5" p:age="24"/>
+
+    <bean id="book01" class="com.yejh.bean.Book"
+          p:bname="yellowBook" p:author="sbchang"/>
+
+    <!--    引用类型赋值，引用外部bean-->
+    <bean id="person06" class="com.yejh.bean.Person"
+          p:name="sbchang6" p:age="24">
+        <property name="book" ref="book01"/>
+    </bean>
+
+    <!--    正确设置null值-->
+    <bean id="person07" class="com.yejh.bean.Person">
+        <property name="name">
+            <null></null>
+        </property>
+    </bean>
+
+
+    <!--    引用类型赋值，引用内部bean-->
+    <bean id="person08" class="com.yejh.bean.Person"
+          p:name="sbchang6" p:age="24">
+        <property name="book">
+            <bean class="com.yejh.bean.Book">
+                <property name="author" value="sbchang_book"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!--    为list类型赋值-->
+    <!--    引用类型赋值，引用内部bean-->
+    <bean id="person09" class="com.yejh.bean.Person"
+          p:name="sbchang9" p:age="24">
+        <property name="books">
+            <list>
+                <bean class="com.yejh.bean.Book">
+                    <property name="author" value="sbchang_book"/>
+                </bean>
+                <ref bean="book01"/>
+                <!-- 写不写id无所谓，因为无法被获取到-->
+                <bean id="book02" class="com.yejh.bean.Book" p:author="国际巨星" p:bname="西游记"/>
+            </list>
+
+        </property>
+    </bean>
+
+    <!-- 为map类型赋值-->
+    <bean id="person10" class="com.yejh.bean.Person"
+          p:name="sbchang10" p:age="24">
+        <property name="maps">
+            <map>
+                <entry key="key1" value-ref="book01"/>
+                <entry key="key2" value="value2"/>
+                <entry key="key3">
+                    <bean class="com.yejh.bean.Book" p:bname="爱迪生" p:author="爱豆守护榜"/>
+                </entry>
+            </map>
+
+        </property>
+    </bean>
+
+    <!-- 为peroperties类型赋值-->
+    <bean id="person11" class="com.yejh.bean.Person"
+          p:name="sbchang11" p:age="24">
+        <property name="properties">
+            <props>
+                <prop key="prop1">"dsa"</prop>
+                <prop key="prop2">dsa</prop>
+                <prop key="prop3">14</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--util容器空间-->
+    <util:map id="map1">
+        <entry key="key1" value-ref="book01"/>
+        <entry key="key2" value="value2"/>
+        <entry key="key3">
+            <bean class="com.yejh.bean.Book" p:bname="爱迪生" p:author="爱豆守护榜"/>
+        </entry>
+    </util:map>
+
+    <!--级联属性赋值，如果修改的是引用的属性，则也会修改引用对象的属性-->
+    <bean id="person12" class="com.yejh.bean.Person"
+          p:name="sbchang12" p:age="24">
+        <property name="book" ref="book01"/>
+        <property name="book.author" value="傻逼昌"/>
+
+    </bean>
+</beans>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/aop/aop.iml" filepath="$PROJECT_DIR$/aop/aop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ioc/ioc.iml" filepath="$PROJECT_DIR$/ioc/ioc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdbcTemplate/jdbcTemplate.iml" filepath="$PROJECT_DIR$/jdbcTemplate/jdbcTemplate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring_project.iml" filepath="$PROJECT_DIR$/spring_project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tx/tx.iml" filepath="$PROJECT_DIR$/tx/tx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tx_xml/tx_xml.iml" filepath="$PROJECT_DIR$/tx_xml/tx_xml.iml" />
+    </modules>
+  </component>
+</project>

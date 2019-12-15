@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+
+       ">
+
+    <context:component-scan base-package="com.yejh"/>
+
+    <!--开启基于注解的AOP功能
+        1、将目标类和切面类都加入到ioc容器汇总@Component
+        2、告诉Spring哪个是切面类@Aspect
+        3、在切面类中使用五个通知注解来配置切面中的这些通知方法何时运行
+        4、开启就注解的AOP功能
+        优点：快速方便
+    -->
+
+    <!--基于配置的AOP
+        AOP名称空间
+        优点：功能完善
+        重要的用配置，不重要的用注解
+    -->
+    <!--    <bean id="myMathCalculator" class="com.yejh.impl.MyMathCalculator"/>
+        <bean id="logUtils" class="com.yejh.utils.LogUtils" order="1"/>
+        <aop:config>
+            &lt;!&ndash;指定切面&ndash;&gt;
+            <aop:aspect ref="logUtils">
+                <aop:pointcut id="myPoint" expression="execution(* com.yejh.*.* (..))"/>
+                <aop:before method="logStart" pointcut="execution(* com.yejh.*.* (..))"/>
+                <aop:after-returning method="logReturn" pointcut-ref="myPoint" returning="result"/>
+                <aop:after-throwing method="logException" pointcut-ref="myPoint" throwing="e"/>
+                <aop:after method="logEnd" pointcut-ref="myPoint"/>
+            </aop:aspect>
+
+        </aop:config>
+
+        <aop:aspectj-autoproxy></aop:aspectj-autoproxy>-->
+</beans>
