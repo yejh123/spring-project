@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/context/spring-context.xsd
        ">
 
-<!--使用静态工厂创建实例-->
+    <!--使用静态工厂创建实例-->
     <bean id="book1" class="com.yejh.factory.BookStaticFactory" factory-method="BookInstance">
 
         <constructor-arg name="bname" value="搞事"/>
@@ -59,6 +59,9 @@
 
     <!-- DI（依赖注入）
     使用Autowired注解实现根据类型实现自动匹配
+    在指定要扫描的包时，<context:component-scan>
+    元素会自动注册一个bean的后置处理器：AutowiredAnnotationBeanPostProcessor的实例。
+    该后置处理器可以自动装配标记了@Autowired、@Resource或@Inject注解的属性。
         原理：
         1、先按照类型去容器中找到对应的组件：bookDao = ioc.getBean(BookService)
             （1）找到一个，找到就赋值

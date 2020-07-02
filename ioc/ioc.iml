@@ -2,7 +2,15 @@
 <module version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/ioc3.xml</file>
+          <file>file://$MODULE_DIR$/src/ioc4.xml</file>
+          <file>file://$MODULE_DIR$/src/ioc.xml</file>
+          <file>file://$MODULE_DIR$/src/c3p0.xml</file>
+          <file>file://$MODULE_DIR$/src/ioc2.xml</file>
+        </fileset>
+      </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
@@ -12,7 +20,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="lib" level="application" />
     <orderEntry type="module-library">
       <library name="JUnit4">
         <CLASSES>
@@ -23,5 +30,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

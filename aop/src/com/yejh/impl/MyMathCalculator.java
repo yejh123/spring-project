@@ -4,14 +4,15 @@ package com.yejh.impl;/**
  */
 
 import com.yejh.inter.Calculator;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
  * @description: TODO
  **/
 
-@Service
-public class MyMathCalculator {
+@Component
+public class MyMathCalculator implements Calculator{
 
     //@Override
     public int add(int i, int j) {

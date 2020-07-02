@@ -13,7 +13,7 @@ import java.util.Properties;
 
 /**
  * @description: TODO
- *
+ * <p>
  * ioc是一个容器，帮我们管理所有的组件
  * 1、依赖注入：@Autowired：自动赋值
  * 2、某个组件要使用Spring提供的更多（IOC、AOP）必须先加入到容器中
@@ -28,8 +28,18 @@ import java.util.Properties;
  **/
 public class IOCTest {
     ApplicationContext ioc = new ClassPathXmlApplicationContext("ioc.xml");
+
     @Test
-    public void test1(){
+    public void test0() {
+        String[] beanDefinitionNames = ioc.getBeanDefinitionNames();
+        System.out.println("beanDefinitionNames: ");
+        for (String name : beanDefinitionNames) {
+            System.out.println(name);
+        }
+    }
+
+    @Test
+    public void test1() {
         //ApplicationContext代表ioc容器
         //当前应用的xml配置文件在ClassPath下
         Person person01 = (Person) ioc.getBean("person01");
@@ -38,53 +48,53 @@ public class IOCTest {
     }
 
     @Test
-    public void test2(){
+    public void test2() {
         Person person02 = ioc.getBean("person02", Person.class);
     }
 
     @Test
-    public void test3(){
+    public void test3() {
         Person person03 = ioc.getBean("person03", Person.class);
         System.out.println(person03);
     }
 
     @Test
-    public void test5(){
+    public void test5() {
         Person person05 = ioc.getBean("person05", Person.class);
         System.out.println(person05);
     }
 
     @Test
-    public void test6(){
+    public void test6() {
         Person person06 = ioc.getBean("person06", Person.class);
         System.out.println(person06);
     }
 
     @Test
-    public void test8(){
+    public void test8() {
         Person person08 = ioc.getBean("person08", Person.class);
         System.out.println(person08);
     }
 
     @Test
-    public void test9(){
+    public void test9() {
         Person person09 = ioc.getBean("person09", Person.class);
         System.out.println(person09);
     }
 
     @Test
-    public void test10(){
+    public void test10() {
         Person person10 = ioc.getBean("person10", Person.class);
         System.out.println(person10);
     }
 
     @Test
-    public void test11(){
+    public void test11() {
         Person person11 = ioc.getBean("person11", Person.class);
         System.out.println(person11);
         Properties properties = person11.getProperties();
         Collection<Object> values = properties.values();
-        for(Object o: values){
+        for (Object o : values) {
             System.out.println(o.getClass() + " " + o);
         }
     }

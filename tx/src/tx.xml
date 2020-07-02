@@ -31,5 +31,5 @@
     <!--开启基于注解的事务控制模式-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-<!--给事务方法加上注解-->
+    <!--给事务方法加上注解-->
 </beans>

@@ -21,8 +21,6 @@ public class TxTest {
     public void test1() {
         BookService bookService = ioc.getBean(BookService.class);
         bookService.checkout("Tom", "ISBN-001");
-
-
     }
 
     @Test

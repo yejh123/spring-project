@@ -35,21 +35,21 @@
     <bean id="book01" class="com.yejh.bean.Book"
           p:bname="yellowBook" p:author="sbchang"/>
 
-    <!--    引用类型赋值，引用外部bean-->
+    <!--引用类型赋值，引用外部bean-->
     <bean id="person06" class="com.yejh.bean.Person"
           p:name="sbchang6" p:age="24">
         <property name="book" ref="book01"/>
     </bean>
 
-    <!--    正确设置null值-->
+    <!--正确设置null值-->
     <bean id="person07" class="com.yejh.bean.Person">
         <property name="name">
-            <null></null>
+            <null/>
         </property>
     </bean>
 
 
-    <!--    引用类型赋值，引用内部bean-->
+    <!--引用类型赋值，引用内部bean，内部bean不能使用在任何其他地方-->
     <bean id="person08" class="com.yejh.bean.Person"
           p:name="sbchang6" p:age="24">
         <property name="book">
@@ -59,8 +59,8 @@
         </property>
     </bean>
 
-    <!--    为list类型赋值-->
-    <!--    引用类型赋值，引用内部bean-->
+    <!--为list类型赋值-->
+    <!--引用类型赋值，引用内部bean-->
     <bean id="person09" class="com.yejh.bean.Person"
           p:name="sbchang9" p:age="24">
         <property name="books">
@@ -76,7 +76,7 @@
         </property>
     </bean>
 
-    <!-- 为map类型赋值-->
+    <!--为map类型赋值-->
     <bean id="person10" class="com.yejh.bean.Person"
           p:name="sbchang10" p:age="24">
         <property name="maps">
@@ -91,7 +91,7 @@
         </property>
     </bean>
 
-    <!-- 为peroperties类型赋值-->
+    <!--为peroperties类型赋值-->
     <bean id="person11" class="com.yejh.bean.Person"
           p:name="sbchang11" p:age="24">
         <property name="properties">
@@ -111,6 +111,8 @@
             <bean class="com.yejh.bean.Book" p:bname="爱迪生" p:author="爱豆守护榜"/>
         </entry>
     </util:map>
+
+
 
     <!--级联属性赋值，如果修改的是引用的属性，则也会修改引用对象的属性-->
     <bean id="person12" class="com.yejh.bean.Person"

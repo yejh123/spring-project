@@ -34,6 +34,8 @@
         2、配置事务方法
         3、告诉Spring哪些方法是事务方法
     -->
+
+    <!--配置事务切面-->
     <aop:config>
         <aop:pointcut id="txPoint" expression="execution(* com.yejh.service.*.*(..))"/>
         <!--事务建议；事务增强 advice-ref指向事务管理器的配置-->

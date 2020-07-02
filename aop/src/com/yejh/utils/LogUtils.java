@@ -70,10 +70,12 @@ import java.util.Arrays;
 public class LogUtils {
 
     @Pointcut("execution(* com.yejh.impl.MyMathCalculator.*(..))")
-    public void myPoint() {
-    }
+    public void myPoint() {}
 
-    @Around(value = "myPoint()")
+    @Pointcut("execution(* com.yejh.impl.MyMathCalculator2.*(..))")
+    public void myPoint2(){}
+
+    @Around(value = "myPoint2()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws RuntimeException {
         Object[] args = proceedingJoinPoint.getArgs();
         Object result = null;
@@ -90,8 +92,8 @@ public class LogUtils {
         return result;
     }
 
-//    //在执行目标方法之前运行，写入切入点表达式
-//    //execution(方法签名）
+    //在执行目标方法之前运行，写入切入点表达式
+    //execution(方法签名）
 //    @Before("execution(public int com.yejh.impl.MyMathCalculator.*(int, int))")               //前置通知
 //    public static void logStart(Method method, Object...args){
 //        System.out.println("【" + method.getName() + "】方法开始执行，args【" + Arrays.toString(args) + "】");
@@ -120,45 +122,46 @@ public class LogUtils {
     /* JoinPoint：封装了当前目标方法的详细信息
 
      */
-//    @Before("myPoint()")               //前置通知
-//    public static void logStart(JoinPoint joinPoint){
-//        //获取目标方法运行时参数
-//        Object[] args = joinPoint.getArgs();
-//
-//        //获取目标方法签名
-//        Signature signature = joinPoint.getSignature();
-////        System.out.println(signature.getName());        //add
-////        System.out.println(signature.getDeclaringType());       //class com.yejh.impl.MyMathCalculator
-////        System.out.println(signature.getDeclaringTypeName());   //com.yejh.impl.MyMathCalculator
-////        System.out.println(signature.getModifiers());           //1
-////        System.out.println(signature.getClass());               //class org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint$MethodSignatureImpl
-//
-////        System.out.println(joinPoint.getKind());        //method-execution
-////        System.out.println(joinPoint.getSourceLocation());      //org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint$SourceLocationImpl@696da30b
-////        System.out.println(joinPoint.getStaticPart());      //execution(int com.yejh.impl.MyMathCalculator.add(int,int))
-////        System.out.println(joinPoint.getTarget());      //com.yejh.impl.MyMathCalculator@4e7912d8
-////        System.out.println(joinPoint.getThis());        //com.yejh.impl.MyMathCalculator@4e7912d8
-////        System.out.println(joinPoint.getClass());       //class org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint
-//        System.out.println("【" + signature+  "】方法开始执行，args【" + "】");
-//    }
+    @Before("myPoint()")               //前置通知
+    public static void logStart(JoinPoint joinPoint){
+        //获取目标方法运行时参数
+        Object[] args = joinPoint.getArgs();
+
+        //获取目标方法签名
+        Signature signature = joinPoint.getSignature();
+//        System.out.println(signature.getName());        //add
+//        System.out.println(signature.getDeclaringType());       //class com.yejh.impl.MyMathCalculator
+//        System.out.println(signature.getDeclaringTypeName());   //com.yejh.impl.MyMathCalculator
+//        System.out.println(signature.getModifiers());           //1
+//        System.out.println(signature.getClass());               //class org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint$MethodSignatureImpl
+
+//        System.out.println(joinPoint.getKind());        //method-execution
+//        System.out.println(joinPoint.getSourceLocation());      //org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint$SourceLocationImpl@696da30b
+//        System.out.println(joinPoint.getStaticPart());      //execution(int com.yejh.impl.MyMathCalculator.add(int,int))
+//        System.out.println(joinPoint.getTarget());      //com.yejh.impl.MyMathCalculator@4e7912d8
+//        System.out.println(joinPoint.getThis());        //com.yejh.impl.MyMathCalculator@4e7912d8
+//        System.out.println(joinPoint.getClass());       //class org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint
+        System.out.println("【" + signature+  "】方法开始执行，args【" + "】");
+    }
 
     //在目标方法正常执行完成之后执行
     //告诉spring哪个参数用来接收返回值
-//    @AfterReturning(value = "myPoint()", returning = "result")     //返回通知
-//    public static void logReturn(JoinPoint joinPoint, Object result){
-//        System.out.println("【" + joinPoint.getSignature() + "】方法开始完毕，res=" + result);
-//    }
-//
-//    //在目标方法出现异常时执行
-//    @AfterThrowing(value = "myPoint()", throwing = "e")          //
-//    public static void logException(JoinPoint joinPoint, Exception e){
-//
-//        System.out.println("【" + joinPoint.getSignature() + "】方法出现异常，异常信息：" +e );
-//    }
-//
-//    //在目标方法执行结束之后执行
-//    @After("myPoint()")                //后置通知
-//    public static void logEnd(JoinPoint joinPoint){
-//        System.out.println("【" + joinPoint.getSignature() + "】方法结束");
-//    }
+    //joinPoint必须是参数的第一位
+    @AfterReturning(value = "myPoint()", returning = "result")     //返回通知
+    public static void logReturn(JoinPoint joinPoint, Object result){
+        System.out.println("【" + joinPoint.getSignature() + "】方法开始完毕，res=" + result);
+    }
+
+    //在目标方法出现异常时执行
+    @AfterThrowing(value = "myPoint()", throwing = "e")          //
+    public static void logException(JoinPoint joinPoint, Exception e){
+
+        System.out.println("【" + joinPoint.getSignature() + "】方法出现异常，异常信息：" +e );
+    }
+
+    //在目标方法执行结束之后执行
+    @After("myPoint()")                //后置通知
+    public static void logEnd(JoinPoint joinPoint){
+        System.out.println("【" + joinPoint.getSignature() + "】方法结束");
+    }
 }
