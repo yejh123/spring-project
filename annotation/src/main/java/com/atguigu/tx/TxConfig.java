@@ -86,7 +86,7 @@ public class TxConfig {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource());
 		return jdbcTemplate;
 	}
-	
+
 	//注册事务管理器在容器中
 	@Bean
 	public PlatformTransactionManager transactionManager() throws Exception{

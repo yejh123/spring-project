@@ -87,7 +87,7 @@ Spring容器的refresh()【创建刷新】;
 	1、beanFactory.preInstantiateSingletons();初始化后剩下的单实例bean
 		1）、获取容器中的所有Bean，依次进行初始化和创建对象
 		2）、获取Bean的定义信息；RootBeanDefinition
-		3）、Bean不是抽象的，是单实例的，是懒加载；
+		3）、Bean不是抽象的，是单实例的，不是懒加载；
 			1）、判断是否是FactoryBean；是否是实现FactoryBean接口的Bean；
 			2）、不是工厂Bean。利用getBean(beanName);创建对象
 				0、getBean(beanName)； ioc.getBean();
@@ -147,24 +147,24 @@ Spring容器的refresh()【创建刷新】;
 		3）、publishEvent(new ContextRefreshedEvent(this));发布容器刷新完成事件；
 		4）、liveBeansView.registerApplicationContext(this);
 	
-	======总结===========
-	1）、Spring容器在启动的时候，先会保存所有注册进来的Bean的定义信息；
-		1）、xml注册bean；<bean>
-		2）、注解注册Bean；@Service、@Component、@Bean、xxx
-	2）、Spring容器会合适的时机创建这些Bean
-		1）、用到这个bean的时候；利用getBean创建bean；创建好以后保存在容器中；
-		2）、统一创建剩下所有的bean的时候；finishBeanFactoryInitialization()；
-	3）、后置处理器；BeanPostProcessor
-		1）、每一个bean创建完成，都会使用各种后置处理器进行处理；来增强bean的功能；
-			AutowiredAnnotationBeanPostProcessor:处理自动注入
-			AnnotationAwareAspectJAutoProxyCreator:来做AOP功能；
-			xxx....
-			增强的功能注解：
-			AsyncAnnotationBeanPostProcessor
-			....
-	4）、事件驱动模型；
-		ApplicationListener；事件监听；
-		ApplicationEventMulticaster；事件派发：
+==========总结===========
+1）、Spring容器在启动的时候，先会保存所有注册进来的Bean的定义信息；
+    1）、xml注册bean；<bean>
+    2）、注解注册Bean；@Service、@Component、@Bean、xxx
+2）、Spring容器会在合适的时机创建这些Bean
+    1）、用到这个bean的时候；利用getBean创建bean；创建好以后保存在容器中；
+    2）、统一创建剩下所有的bean的时候；finishBeanFactoryInitialization()；
+3）、后置处理器；BeanPostProcessor
+    1）、每一个bean创建完成，都会使用各种后置处理器进行处理；来增强bean的功能；
+        AutowiredAnnotationBeanPostProcessor:处理自动注入
+        AnnotationAwareAspectJAutoProxyCreator:来做AOP功能；
+        xxx....
+        增强的功能注解：
+        AsyncAnnotationBeanPostProcessor
+        ....
+4）、事件驱动模型；
+    ApplicationListener：事件监听；
+    ApplicationEventMulticaster：事件派发：
 	
 			
 					
